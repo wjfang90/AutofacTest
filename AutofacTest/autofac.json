@@ -1,0 +1,41 @@
+{
+  "defaultAssembly": "AutofacTest",
+  "components": [
+
+    {
+      "type": "AutofacTest.ChineseDal, AutofacTest",
+      "services": [
+        {
+          //"type": "AutofacTest.IPerson,AutofacTest"
+          //"type": "AutofacTest.IPerson`1[[AutofacTest.Animal,AutofacTest]],AutofacTest"
+          "type": "AutofacTest.IChineseDal,AutofacTest",
+          "key": "Chinese"
+        }
+      ],
+      "autoActivate": true,
+      "instanceScope": "perlifetimescope" //singleinstance, perlifetimescope, perdependency, perrequest
+    }
+    //,
+    //{
+    //  "type": "Bdyh.DataAccessLayer.ES_6_5_4DAL.ChlDAL, Bdyh.DataAccessLayer.ES_6_5_4DAL",
+    //  "services": [
+    //    {
+    //      //"type": "Bdyh.DataAccessLayer.Interfaces.IDAL`1[[Bdyh.Model.ChlModel,Bdyh.Model]],Bdyh.DataAccessLayer.Interfaces"
+    //      "type": "Bdyh.DataAccessLayer.Interfaces.IChlDAL,Bdyh.DataAccessLayer.Interfaces",
+    //      "services": [
+    //        {
+    //          "type": "Bdyh.DataAccessLayer.Interfaces.IDAL`1[[Bdyh.Model.ChlModel,Bdyh.Model]],Bdyh.DataAccessLayer.Interfaces"
+    //        }
+    //      ]
+    //    }        
+    //  ],
+    //  "autoActivate": true,
+    //  "injectProperties": true,
+    //  "instanceScope": "singleinstance", //singleinstance, perlifetimescope, perdependency, perrequest
+    //  "parameters": {
+    //    "name": "chl"
+    //  }
+    //}
+
+  ]
+}
