@@ -9,8 +9,18 @@ namespace AutofacTest
     {
         static void Main(string[] args)
         {
+
             Console.WriteLine("Hello World!");
 
+            RegisterByConfigFile();
+
+            //RgisterAndResolveNamed();
+
+            Console.ReadKey();
+        }
+
+        private static void RegisterByConfigFile()
+        {
             var config = new ConfigurationBuilder();
             config.AddJsonFile("autofac.json");
 
@@ -33,27 +43,42 @@ namespace AutofacTest
 
             //var p = container.Resolve<IPerson>();
             //var p = container.Resolve<IPerson<Animal>>();
-            var p = container.Resolve<IChineseDal>();
-            p.SayHello("张三 p");
+
+            //json file 不能配置service.key
+            //var p = container.Resolve<IChineseDal>();
+            //p.SayHello("张三 p");
+
+            //json file 配置service.key="Chinese"
+            var p1 = container.ResolveKeyed<IChineseDal>("Chinese");
+            p1.SayHello("张三");
 
 
-            var p2 = container.ResolveNamed<IChineseDal>("Chinese");
-            p2.SayHello("张三");
+            //to do  json file 配置解析不出来，原因未找到
+            //var p2 = container.ResolveNamed<IChineseDal>("Chinese");
+            //p2.SayHello("张三");
 
 
 
-            using (var scope = container.BeginLifetimeScope())
-            {
-                var chlDal4 = scope.ResolveNamed("Chl", typeof(IChineseDal));
-            }
+            //using (var scope = container.BeginLifetimeScope())
+            //{
+            //    //var dal = scope.ResolveNamed("Chinese", typeof(IChineseDal));
+            //    var dal = (scope.ResolveKeyed("Chinese", typeof(IChineseDal))) as IChineseDal;
+            //    dal.SayHello("李四");
+            //}
+        }
 
+        private static void RgisterAndResolveNamed()
+        {
+            var containerBuilder = new ContainerBuilder();
+            containerBuilder.RegisterType<ChineseDal>().Named<IChineseDal>("Chinese");
 
+            var container = containerBuilder.Build();
 
-            Console.ReadKey();
+           var dal= container.ResolveNamed<IChineseDal>("Chinese");
+            dal.SayHello("张三 ResolveNamed");
+
         }
     }
-
-
 
 
 
